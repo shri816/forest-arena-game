@@ -14,12 +14,12 @@ const gameState = {
     maxCombo: 0
 };
 
-// Initialize Google Analytics (replace G-XXXXXXXXXX with your actual Measurement ID)
+// Initialize Google Analytics
 if (window.gameAnalytics) {
     // Only initialize if not on localhost (to avoid tracking during development)
     const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
     if (isProduction) {
-        window.gameAnalytics.initGA('G-XXXXXXXXXX'); // Replace with your GA4 Measurement ID
+        window.gameAnalytics.initGA('G-68SVMHVFTK');
     } else {
         console.log('Analytics disabled for local development');
     }
