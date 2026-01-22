@@ -10,5 +10,17 @@ const gameState = {
     wave: 1,
     kills: 0,
     combo: 0,
-    comboTimer: 0
+    comboTimer: 0,
+    maxCombo: 0
 };
+
+// Initialize Google Analytics (replace G-XXXXXXXXXX with your actual Measurement ID)
+if (window.gameAnalytics) {
+    // Only initialize if not on localhost (to avoid tracking during development)
+    const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+    if (isProduction) {
+        window.gameAnalytics.initGA('G-XXXXXXXXXX'); // Replace with your GA4 Measurement ID
+    } else {
+        console.log('Analytics disabled for local development');
+    }
+}

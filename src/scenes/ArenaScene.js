@@ -67,6 +67,12 @@ class ArenaScene extends Phaser.Scene {
         gameState.wave = 1;
         gameState.kills = 0;
         gameState.combo = 0;
+        gameState.maxCombo = 0; // Track max combo for analytics
+
+        // Track game start
+        if (window.gameAnalytics) {
+            window.gameAnalytics.trackGameStart();
+        }
 
         // Start first wave after a short delay
         this.time.delayedCall(1500, () => {
@@ -315,13 +321,19 @@ class ArenaScene extends Phaser.Scene {
         }
     }
 
-    addScore(points) {
+    addScore(points, enemyType = 'unknown') {
         // Apply combo multiplier
         const multiplier = this.getComboMultiplier();
         const finalPoints = points * multiplier;
 
         gameState.score += finalPoints;
+        gameState.kills++;
         this.hud.updateScore(gameState.score);
+
+        // Track enemy kill
+        if (window.gameAnalytics) {
+            window.gameAnalytics.trackEnemyKill(enemyType, finalPoints, this.comboCount);
+        }
 
         // Decrement enemies remaining
         this.enemiesRemaining--;
@@ -335,8 +347,18 @@ class ArenaScene extends Phaser.Scene {
         this.comboCount++;
         gameState.combo = this.comboCount;
 
+        // Track max combo
+        if (this.comboCount > gameState.maxCombo) {
+            gameState.maxCombo = this.comboCount;
+        }
+
         // Update HUD
         this.hud.updateCombo(this.comboCount);
+
+        // Track combo achievement
+        if (window.gameAnalytics && this.comboCount >= 5) {
+            window.gameAnalytics.trackCombo(this.comboCount, gameState.score);
+        }
 
         // Reset combo timer
         if (this.comboTimer) {
@@ -370,6 +392,15 @@ class ArenaScene extends Phaser.Scene {
         gameState.score += waveBonus;
         this.hud.updateScore(gameState.score);
 
+        // Track wave completion
+        if (window.gameAnalytics) {
+            window.gameAnalytics.trackWaveComplete(
+                this.currentWave,
+                gameState.score,
+                gameState.kills
+            );
+        }
+
         // Show wave complete message
         this.hud.showMessage(`WAVE COMPLETE!\n+${waveBonus} Bonus`, 2000);
 
@@ -395,6 +426,21 @@ class ArenaScene extends Phaser.Scene {
         if (!this.gameActive) return;
 
         this.gameActive = false;
+
+        // Track game over with stats
+        if (window.gameAnalytics) {
+            const previousHighScore = gameState.highScore;
+            const isNewHighScore = gameState.score > previousHighScore;
+
+            window.gameAnalytics.trackGameOver({
+                score: gameState.score,
+                wave: this.currentWave,
+                kills: gameState.kills,
+                maxCombo: gameState.maxCombo,
+                isNewHighScore: isNewHighScore,
+                previousHighScore: previousHighScore
+            });
+        }
 
         // Stop all enemies
         this.enemies.children.entries.forEach(enemy => {

@@ -8,12 +8,26 @@
     <meta name="mobile-web-app-capable" content="yes">
     <title>Forest Arena Fighter - Hack & Slash</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google Analytics 4 -->
+    <!-- Replace G-XXXXXXXXXX with your actual GA4 Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        // GA4 will be initialized in GameAnalytics.js
+    </script>
 </head>
 <body>
     <div id="game-container"></div>
 
     <!-- Phaser 3 from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
+
+    <!-- Analytics -->
+    <script src="src/analytics/GameAnalytics.js"></script>
+    <script src="src/analytics/FirebaseLeaderboard.js"></script>
 
     <!-- Game files -->
     <script src="src/config.js"></script>

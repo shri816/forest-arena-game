@@ -74,11 +74,24 @@ Your game will be live at: `https://shri816.github.io/forest-arena-game/`
 
 - **Game Engine**: [Phaser 3](https://phaser.io/) - Fast, free, and fun HTML5 game framework
 - **Graphics**: Pixel art from [Legacy-Fantasy High Forest 2.3](https://itch.io/) asset pack
+- **Analytics**: Google Analytics 4 for user tracking and Firebase for global leaderboard
 - **Architecture**:
   - Scene-based structure (Boot, Title, Arena)
   - Entity component pattern
   - Arcade Physics system
   - Adaptive layout system
+  - Event-driven analytics tracking
+
+## 📊 Analytics & Leaderboard
+
+This game includes comprehensive analytics tracking:
+
+- **User Metrics**: Track unique players, geographic regions, and device types
+- **Game Events**: Monitor scores, waves reached, combo achievements, and more
+- **Global Leaderboard**: Firebase-powered worldwide high score ranking
+- **Real-time Stats**: Live tracking of player engagement
+
+**[See Analytics Setup Guide](ANALYTICS_SETUP.md)** for instructions on enabling tracking and leaderboards.
 
 ## 📱 Mobile Responsiveness
 

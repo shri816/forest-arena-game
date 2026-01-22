@@ -207,7 +207,7 @@ class ArenaEnemy extends Phaser.Physics.Arcade.Sprite {
         }
 
         // Update score and combo
-        this.scene.addScore(this.scoreValue);
+        this.scene.addScore(this.scoreValue, this.type);
         this.scene.incrementCombo();
 
         // Chance to drop power-up (20%)
