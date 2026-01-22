@@ -6,7 +6,7 @@ A responsive hack & slash arena fighter built with Phaser.js featuring adaptive 
 
 ## 🎮 Play Now
 
-**Live Demo:** [Play Forest Arena](https://YOUR_GITHUB_USERNAME.github.io/forest-arena-game/)
+**Live Demo:** [Play Forest Arena](https://shri816.github.io/forest-arena-game/)
 
 ## ✨ Features
 
@@ -40,7 +40,7 @@ A responsive hack & slash arena fighter built with Phaser.js featuring adaptive 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/forest-arena-game.git
+git clone https://github.com/shri816/forest-arena-game.git
 cd forest-arena-game
 ```
 
@@ -68,7 +68,7 @@ This game is ready to deploy to GitHub Pages:
 4. Choose "main" branch and "/ (root)" folder
 5. Click Save
 
-Your game will be live at: `https://YOUR_GITHUB_USERNAME.github.io/forest-arena-game/`
+Your game will be live at: `https://shri816.github.io/forest-arena-game/`
 
 ## 🛠️ Technology Stack
 
