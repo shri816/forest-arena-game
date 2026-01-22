@@ -19,7 +19,7 @@ if (window.gameAnalytics) {
     // Only initialize if not on localhost (to avoid tracking during development)
     const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
     if (isProduction) {
-        window.gameAnalytics.initGA('G-68SVMHVFTK');
+        window.gameAnalytics.initGA('G-7NFV4WM3QF');
     } else {
         console.log('Analytics disabled for local development');
     }
