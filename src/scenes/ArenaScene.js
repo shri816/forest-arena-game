@@ -10,7 +10,7 @@ class ArenaScene extends Phaser.Scene {
         const isPortrait = height > width;
 
         // Arena properties - centered on screen
-        this.arenaRadius = isPortrait ? 280 : 360;
+        this.arenaRadius = isPortrait ? 320 : 400;
         this.arenaCenter = { x: width / 2, y: isPortrait ? height * 0.45 : height / 2 };
 
         // Store layout info
@@ -189,13 +189,13 @@ class ArenaScene extends Phaser.Scene {
     createMobileControls() {
         // Adaptive positioning based on layout
         if (this.isPortrait) {
-            // Portrait: controls at bottom
+            // Portrait: controls positioned near arena boundary
             const joystickX = 100;
-            const joystickY = this.gameHeight - 120;
+            const joystickY = this.gameHeight - 220;
             this.virtualJoystick = new VirtualJoystick(this, joystickX, joystickY);
 
             const attackX = this.gameWidth - 100;
-            const attackY = this.gameHeight - 120;
+            const attackY = this.gameHeight - 220;
             this.attackButton = new TouchButton(
                 this,
                 attackX,
@@ -211,7 +211,7 @@ class ArenaScene extends Phaser.Scene {
             );
 
             const dashX = this.gameWidth - 100;
-            const dashY = this.gameHeight - 220;
+            const dashY = this.gameHeight - 320;
             this.dashButton = new TouchButton(
                 this,
                 dashX,
