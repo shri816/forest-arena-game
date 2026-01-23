@@ -9,8 +9,16 @@ class ArenaScene extends Phaser.Scene {
         const height = this.cameras.main.height;
         const isPortrait = height > width;
 
-        // Arena properties - centered on screen
-        this.arenaRadius = isPortrait ? 320 : 400;
+        // Arena properties - dynamically sized to fit screen
+        // Portrait: fit within width and leave room for controls at bottom
+        // Landscape: fit within height with padding for HUD
+        if (isPortrait) {
+            this.arenaRadius = Math.min(width * 0.45, height * 0.35);
+            this.arenaRadius = Math.max(this.arenaRadius, 200); // minimum size
+        } else {
+            this.arenaRadius = Math.min(height * 0.42, width * 0.28);
+            this.arenaRadius = Math.max(this.arenaRadius, 250); // minimum size
+        }
         this.arenaCenter = { x: width / 2, y: isPortrait ? height * 0.45 : height / 2 };
 
         // Store layout info
