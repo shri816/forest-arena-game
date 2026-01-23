@@ -18,16 +18,32 @@ class TouchButton {
     }
 
     create() {
+        // Glow effect (outer ring)
+        this.glow = this.scene.add.circle(this.x, this.y, this.radius + 8, this.color, 0.3);
+        this.glow.setScrollFactor(0);
+        this.glow.setDepth(999);
+
+        // Pulse animation for glow
+        this.scene.tweens.add({
+            targets: this.glow,
+            alpha: 0.5,
+            scale: 1.15,
+            duration: 600,
+            yoyo: true,
+            repeat: -1,
+            ease: 'Sine.easeInOut'
+        });
+
         // Button circle
-        this.button = this.scene.add.circle(this.x, this.y, this.radius, this.color, 0.4);
-        this.button.setStrokeStyle(3, this.color, 0.8);
+        this.button = this.scene.add.circle(this.x, this.y, this.radius, this.color, 0.6);
+        this.button.setStrokeStyle(3, 0xffffff, 0.9);
         this.button.setScrollFactor(0);
         this.button.setDepth(1000);
         this.button.setInteractive();
 
         // Button label
         this.text = this.scene.add.text(this.x, this.y, this.label, {
-            font: 'bold 20px Arial',
+            font: 'bold 24px Arial',
             fill: '#ffffff'
         });
         this.text.setOrigin(0.5);
@@ -68,8 +84,9 @@ class TouchButton {
         this.isPressed = true;
 
         // Visual feedback
-        this.button.setAlpha(0.8);
+        this.button.setAlpha(1);
         this.button.setScale(0.9);
+        this.glow.setAlpha(0.8);
 
         // Execute callback
         if (this.callback) {
@@ -81,7 +98,7 @@ class TouchButton {
         this.isPressed = false;
 
         // Reset visual
-        this.button.setAlpha(0.4);
+        this.button.setAlpha(0.6);
         this.button.setScale(1);
     }
 
@@ -96,17 +113,20 @@ class TouchButton {
     }
 
     show() {
-        this.button.setAlpha(0.4);
+        this.glow.setVisible(true);
+        this.button.setAlpha(0.6);
         this.text.setAlpha(1);
     }
 
     hide() {
+        this.glow.setVisible(false);
         this.button.setAlpha(0);
         this.text.setAlpha(0);
         this.cooldownOverlay.setAlpha(0);
     }
 
     destroy() {
+        this.glow.destroy();
         this.button.destroy();
         this.text.destroy();
         this.cooldownOverlay.destroy();
