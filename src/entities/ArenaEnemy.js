@@ -51,12 +51,12 @@ class ArenaEnemy extends Phaser.Physics.Arcade.Sprite {
             case 'boar':
                 this.maxHealth = 2;
                 this.health = 2;
-                this.speed = 120;
+                this.speed = 85;  // Reduced from 120
                 this.damage = 1;
                 this.scoreValue = 25;
                 this.scale = 2.0;
                 this.hitboxSize = { width: 40, height: 28, offsetX: 4, offsetY: 4 };
-                this.chargeSpeed = 200; // Boar charges faster
+                this.chargeSpeed = 140; // Reduced from 200
                 this.isCharging = false;
                 this.setTint(0xffaaaa); // Red tint
                 break;

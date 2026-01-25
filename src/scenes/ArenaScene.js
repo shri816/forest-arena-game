@@ -298,9 +298,9 @@ class ArenaScene extends Phaser.Scene {
 
     getEnemyCountForWave(wave) {
         if (wave <= 3) return 3 + (wave - 1) * 2; // 3, 5, 7
-        if (wave <= 6) return 8 + (wave - 4) * 2; // 10, 12
-        if (wave <= 10) return 15 + (wave - 7) * 3; // 15, 18, 20, 25
-        return 25 + (wave - 10) * 5; // Scaling for endless waves
+        if (wave <= 6) return 7 + (wave - 4) * 2; // 7, 9, 11
+        if (wave <= 10) return 11 + (wave - 7) * 2; // 11, 13, 15, 17
+        return 18 + (wave - 10) * 2; // Gentler scaling for endless waves
     }
 
     getEnemyTypesForWave(wave) {
@@ -309,9 +309,35 @@ class ArenaScene extends Phaser.Scene {
         return ['snail', 'boar', 'bee']; // All types from wave 7+
     }
 
+    // Weighted enemy selection - gradually introduces harder enemies
+    getWeightedEnemyType(wave) {
+        const roll = Math.random() * 100;
+
+        if (wave <= 3) {
+            // Waves 1-3: Only snails
+            return 'snail';
+        } else if (wave <= 5) {
+            // Waves 4-5: 75% snail, 25% boar (boars are rare)
+            return roll < 75 ? 'snail' : 'boar';
+        } else if (wave <= 7) {
+            // Waves 6-7: 55% snail, 45% boar (more boars)
+            return roll < 55 ? 'snail' : 'boar';
+        } else if (wave <= 9) {
+            // Waves 8-9: 40% snail, 40% boar, 20% bee (bees introduced)
+            if (roll < 40) return 'snail';
+            if (roll < 80) return 'boar';
+            return 'bee';
+        } else {
+            // Wave 10+: 35% snail, 40% boar, 25% bee
+            if (roll < 35) return 'snail';
+            if (roll < 75) return 'boar';
+            return 'bee';
+        }
+    }
+
     spawnRandomEnemy(types) {
-        // Random type from available types
-        const type = Phaser.Utils.Array.GetRandom(types);
+        // Use weighted selection based on wave
+        const type = this.getWeightedEnemyType(this.currentWave);
 
         // Random position around arena edge
         const angle = Math.random() * Math.PI * 2;
