@@ -20,7 +20,7 @@ class ArenaPlayer extends Phaser.Physics.Arcade.Sprite {
         // Attack system
         this.canAttack = true;
         this.attackCooldown = 400; // 0.4 seconds
-        this.attackRange = 70;
+        this.attackRange = 90;  // Increased from 70 for easier hits
         this.attackDamage = 1;
         this.isAttacking = false;
 
