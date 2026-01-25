@@ -49,8 +49,8 @@ class ArenaEnemy extends Phaser.Physics.Arcade.Sprite {
                 break;
 
             case 'boar':
-                this.maxHealth = 2;
-                this.health = 2;
+                this.maxHealth = 1;
+                this.health = 1;
                 this.speed = 85;  // Reduced from 120
                 this.damage = 1;
                 this.scoreValue = 25;
