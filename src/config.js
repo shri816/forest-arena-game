@@ -26,6 +26,9 @@ const config = {
     pixelArt: true,
     antialias: false,
     roundPixels: true,
+    input: {
+        activePointers: 3  // Enable multi-touch (joystick + attack + dash)
+    },
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
