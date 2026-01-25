@@ -100,11 +100,11 @@ class ArenaPlayer extends Phaser.Physics.Arcade.Sprite {
             this.lastFacingDirection = { x: moveX, y: moveY };
         }
 
-        // Apply movement
-        if (!this.isAttacking) {
-            this.setVelocity(moveX * this.speed, moveY * this.speed);
+        // Apply movement (can move while attacking)
+        this.setVelocity(moveX * this.speed, moveY * this.speed);
 
-            // Update animation
+        // Update animation (only if not attacking)
+        if (!this.isAttacking) {
             if (moveX !== 0 || moveY !== 0) {
                 if (this.anims.currentAnim.key !== 'run') {
                     this.play('run');
@@ -114,16 +114,13 @@ class ArenaPlayer extends Phaser.Physics.Arcade.Sprite {
                     this.play('idle');
                 }
             }
+        }
 
-            // Flip sprite based on horizontal movement
-            if (moveX < 0) {
-                this.setFlipX(true);
-            } else if (moveX > 0) {
-                this.setFlipX(false);
-            }
-        } else {
-            // Slow down during attack
-            this.setVelocity(0, 0);
+        // Flip sprite based on horizontal movement
+        if (moveX < 0) {
+            this.setFlipX(true);
+        } else if (moveX > 0) {
+            this.setFlipX(false);
         }
 
         // Handle attack input
